@@ -1,10 +1,10 @@
 package DailyDemo;
 
 public class Test {
-	public static void main(String[] args) {
-		AppleFactory appleFactory = new AppleFactory();
-		Apple apple = (Apple) appleFactory.getInstance();
-	}
+//	public static void main(String[] args) {
+//		AppleFactory appleFactory = new AppleFactory();
+//		Apple apple = (Apple) appleFactory.getInstance();
+//	}
 }
 
 interface FruitFactory {Fruit getInstance();}
