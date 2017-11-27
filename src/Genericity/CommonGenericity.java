@@ -6,9 +6,8 @@ public class CommonGenericity {
 		i.setVar("zhangshan");
 		fun(i);
 		Info<String> i1 = new Info<>();
-		Info<?> i2 = null;
-		i2 = i1;//Type mismatch: cannot convert from Info<String> to Info<Object>
-		
+		Info<Object> i2 = null;
+		i2 = i1;
 	}
 
 	public static void fun(Info<?> i) {
