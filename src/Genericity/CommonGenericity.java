@@ -6,7 +6,7 @@ public class CommonGenericity {
 		i.setVar("zhangshan");
 		fun(i);
 		Info<String> i1 = new Info<>();
-		Info<Object> i2 = null;
+		Info<?> i2 = null;
 		i2 = i1;
 	}
 
