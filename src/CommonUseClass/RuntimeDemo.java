@@ -1,5 +1,7 @@
 package CommonUseClass;
 
+import java.util.Properties;
+
 public class RuntimeDemo {
 
 	public static void main(String[] args) {
@@ -13,6 +15,7 @@ public class RuntimeDemo {
 		System.out.println("此时可用内存剩余：" + run.freeMemory());
 		run.gc();
 		System.out.println("GC后此时可用内存剩余：" + run.freeMemory());
-		run.exit(1);
-	}
+		// run.exit(1);
+		System.getProperties().list(System.out);
+		}
 }
