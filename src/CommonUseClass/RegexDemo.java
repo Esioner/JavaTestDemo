@@ -25,14 +25,14 @@ public class RegexDemo {
 			System.out.println(strs);
 		}
 
-		//
+		//½«Êý×ÖÌæ»»Îª"_"
 		String string2 = "A15ASDAS5574FA15WAWE41DASFSAF54A4FS";
 		String regex3 = "\\d+";
 		Pattern pattern2 = Pattern.compile(regex3);
 		Matcher matcher2 = pattern2.matcher(string2);
 		String newString = matcher2.replaceAll("_");
 		System.out.println(newString);
-
+		
 	}
 
 }
