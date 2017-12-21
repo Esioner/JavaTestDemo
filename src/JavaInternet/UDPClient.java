@@ -18,5 +18,4 @@ public class UDPClient {
 		System.out.println(str);
 		ds.close();
 	}
-
 }
