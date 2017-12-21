@@ -15,14 +15,68 @@ public class JDBC2 {
 
 		Class.forName(dbDriver);
 		// 插入数据
-		resultSetInsert();
-		//更新数据
-		resultSetUpdate();
+		// resultSetInsert();
+		// 更新数据
+		// resultSetUpdate();
+		// 删除数据
+		// resultSetDelete();
+		// 批处理
+		batch();
+	}
+
+	private static void batch() throws Exception {
+		Connection conn = DriverManager.getConnection(url,name,psd);
+		String sql = "INSERT INTO user (name,password,age,sex,birthday) VALUES (?,?,?,?,?)";
+		PreparedStatement preState = conn.prepareStatement(sql);
+		for (int i = 0; i < 10; i++) {
+			preState.setString(1, "测试名称" + i);
+			preState.setString(2, "ceshixingming" + i);
+			preState.setInt(3, 26 + i);
+			preState.setString(4, i % 2 == 0 ? "男" : "女");
+			preState.setDate(5, new Date(new java.util.Date().getTime()));
+			preState.addBatch();
+		}
+		int[] temp = preState.executeBatch();
+		System.out.println("更新了" + temp.length + "条数据");
+		preState.close();
+		conn.close();
+	}
+
+	private static void resultSetDelete() throws Exception {
+		String sql = "SELECT id,name,password,age,sex,birthday FROM user WHERE id=?";
+		Connection conn = DriverManager.getConnection(url, name, psd);
+		PreparedStatement preState = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE);
+		preState.setInt(1, 8);
+		ResultSet resultSet = preState.executeQuery();
+		resultSet.last();
+		resultSet.deleteRow();
+		resultSet.close();
+		preState.close();
+		conn.close();
 
 	}
 
-	private static void resultSetUpdate() {
-		
+	private static void resultSetUpdate() throws Exception {
+		String sql = "SELECT id,name,password,age,sex,birthday FROM user WHERE id=?";
+		Connection conn = DriverManager.getConnection(url, name, psd);
+		PreparedStatement preState = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+				ResultSet.CONCUR_UPDATABLE);
+		// 更新id=3的字段
+		preState.setInt(1, 3);
+		// 取得结果集
+		ResultSet resultSet = preState.executeQuery();
+		// 移动到最后一行
+		resultSet.last();
+		resultSet.updateString("name", "李畅");
+		resultSet.updateString("password", "lichang");
+		resultSet.updateInt("age", 23);
+		resultSet.updateString("sex", "女");
+		resultSet.updateDate("birthday", new Date(new java.util.Date().getTime()));
+		resultSet.updateRow();
+		resultSet.close();
+		preState.close();
+		conn.close();
 	}
 
 	private static void resultSetInsert() throws Exception {
